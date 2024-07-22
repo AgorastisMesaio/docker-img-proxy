@@ -1,0 +1,15 @@
+### Docker Compose example
+services:
+  squid-proxy:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: sw-luis-palacios/base-proxy:main
+    hostname: proxy
+    container_name: mi_proxy
+    ports:
+      - "3128:3128"
+      - "3129:3129"
+    restart: unless-stopped
+    volumes:
+      - ./config:/config
