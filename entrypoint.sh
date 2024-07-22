@@ -20,13 +20,21 @@ if [ -f ${CONFIG_ROOT}/squid.conf ]; then
 fi
 
 # Certificates
-if [ ! -f /etc/squid/certificate.key ] || [ ! -f /etc/squid/certificate.pem ]; then
+if [ ! -f /config/certificate.key ] || [ ! -f /config/certificate.pem ]; then
 	echo 'Generating certificates'
-	openssl genrsa -out /etc/squid/certificate.key 2048
-	openssl req -new -key /etc/squid/certificate.key -out /etc/squid/certificate.csr -subj '/C=US/ST=State/L=City/O=Company/CN=localhost'
-	openssl x509 -req -days 7300 -in /etc/squid/certificate.csr -signkey /etc/squid/certificate.key -out /etc/squid/certificate.crt
-	cat /etc/squid/certificate.crt /etc/squid/certificate.key > /etc/squid/certificate.pem
+	openssl genrsa -out /config/certificate.key 2048
+  if [ -f ${CONFIG_ROOT}/openssl.cnf ]; then
+  	openssl req -new -key /config/certificate.key -out /config/certificate.csr -config /config/openssl.cnf
+  else
+  	openssl req -new -key /config/certificate.key -out /config/certificate.csr -subj '/C=US/ST=State/L=City/O=Company/CN=localhost'
+  fi
+  openssl x509 -req -days 7300 -in /config/certificate.csr -signkey /config/certificate.key -out /config/certificate.crt
+	cat /config/certificate.crt /config/certificate.key > /config/certificate.pem
 fi
+
+#echo 'Sumwall: Installing certificates'
+cp /config/certificate.pem /etc/squid
+cp /config/certificate.key /etc/squid
 
 # Start custom script run.sh
 if [ -f ${CONFIG_ROOT}/run.sh ]; then
