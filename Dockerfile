@@ -1,6 +1,6 @@
 # Dockerfile for NetKit
 #
-# This Dockerfile sets up the latest Ubuntu base image for a secure and 
+# This Dockerfile sets up the latest Ubuntu base image for a secure and
 # up-to-date environment to run a Squid based Proxy
 #
 
@@ -19,6 +19,9 @@ RUN mkdir -p /var/lib/squid && \
 # Copy entrypoint and htmlgenerator scripts
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
+
+# Set the entrypoint
+ENTRYPOINT ["/entrypoint.sh"]
 
 # Command that will be executed through our entrypoint
 CMD ["/usr/sbin/squid", "-N", "-d1"]
