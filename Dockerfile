@@ -16,7 +16,7 @@ RUN mkdir -p /var/lib/squid && \
     /usr/lib/squid/security_file_certgen -c -s /var/lib/squid/ssl_db -M 20MB && \
     chown -R proxy:proxy /var/lib/squid
 
-# Copy entrypoint and htmlgenerator scripts
+# Copy entrypoint
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 

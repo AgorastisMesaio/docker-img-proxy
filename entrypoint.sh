@@ -1,4 +1,3 @@
-
 #!/usr/bin/env bash
 #
 # entrypoint.sh for base-proxy

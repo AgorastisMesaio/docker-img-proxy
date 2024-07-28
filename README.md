@@ -19,27 +19,7 @@ This Docker container is built to run Squid, a high-performance proxy caching se
 - **Custom Entrypoint Script:** Ensures Squid starts with the necessary configurations and directories properly set up.
 - **`/config/run.sh`** You can create your custom bash script that will be called from the `/entrypoint.sh`
 
-## Usage
-
-### Building the Docker Image
-
-To build the Docker image, run the following command in the directory containing the Dockerfile:
-
-```sh
-docker build -t squid-proxy .
-```
-
-### Running the Container
-
-You can run the container using the following docker run command:
-
-```zsh
-docker run -d --name squid-proxy -p 3128:3128 squid-proxy
-```
-
-This will start a container named squid-proxy and map port 3128 on your host to port 3128 in the container, which is the default Squid port.
-
-### Sample docker-compose.yml
+## Sample docker-compose.yml
 
 For easier management and scaling, you can use Docker Compose. Below is a sample docker-compose.yml file:
 
@@ -67,19 +47,24 @@ This docker-compose.yml file does the following:
 - Volumes: Mounts local directories for Squid configuration, cache, and logs.
 - Restart Policy: Ensures the container restarts automatically unless it is explicitly stopped.
 
+## For developers
 
-The container includes a custom entrypoint script (entrypoint.sh) that ensures Squid starts with the necessary configurations:
+If you copy or fork this project to create your own base image.
 
-```zsh
-#!/bin/bash
-# Ensure Squid SSL DB is initialized
-if [ ! -d /var/lib/squid/ssl_db ]; then
-    /usr/lib/squid/security_file_certgen -c -s /var/lib/squid/ssl_db -M 20MB
-    chown -R proxy:proxy /var/lib/squid/ssl_db
-fi
+### Building the Image
 
-# Start Squid
-exec "$@"
+To build the Docker image, run the following command in the directory containing the Dockerfile:
+
+```sh
+docker build -t your-image/base-proxy:main .
+or
+docker build -t base-proxy .
 ```
 
-This script checks if the SSL directory is initialized and sets the correct permissions, then starts Squid.
+### Troubleshoot
+
+This will start a container named squid-proxy and map port 3128 on your host to port 3128 in the container, which is the default Squid port.
+
+```sh
+docker run --rm --name ct_proxy --hostname proxy -p 3128:3128 -v ./config:/config your-image/base-proxy:main
+```
