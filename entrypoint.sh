@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# entrypoint.sh for base-proxy
+# entrypoint.sh for docker-img-proxy
 #
 # Uncomment for debug
 # set -eux

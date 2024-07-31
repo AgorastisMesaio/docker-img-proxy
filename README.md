@@ -1,6 +1,6 @@
 # NetKit Container
 
-![GitHub action workflow status](https://github.com/SW-Luis-Palacios/base-proxy/actions/workflows/docker-publish.yml/badge.svg)
+![GitHub action workflow status](https://github.com/AgorastisMesaio/docker-img-proxy/actions/workflows/docker-publish.yml/badge.svg)
 
 This repository contains a `Dockerfile` aimed to create a *base image* to provide a minimal Linux environment with Squid instance dockerized.
 
@@ -56,9 +56,9 @@ If you copy or fork this project to create your own base image.
 To build the Docker image, run the following command in the directory containing the Dockerfile:
 
 ```sh
-docker build -t your-image/base-proxy:main .
+docker build -t your-image/docker-img-proxy:main .
 or
-docker build -t base-proxy .
+docker build -t docker-img-proxy .
 ```
 
 ### Troubleshoot
@@ -66,5 +66,5 @@ docker build -t base-proxy .
 This will start a container named squid-proxy and map port 3128 on your host to port 3128 in the container, which is the default Squid port.
 
 ```sh
-docker run --rm --name ct_proxy --hostname proxy -p 3128:3128 -v ./config:/config your-image/base-proxy:main
+docker run --rm --name ct_proxy --hostname proxy -p 3128:3128 -v ./config:/config your-image/docker-img-proxy:main
 ```
