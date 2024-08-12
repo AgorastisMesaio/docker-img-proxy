@@ -1,4 +1,4 @@
-# NetKit Container
+# Squid Container
 
 ![GitHub action workflow status](https://github.com/AgorastisMesaio/docker-img-proxy/actions/workflows/docker-publish.yml/badge.svg)
 
