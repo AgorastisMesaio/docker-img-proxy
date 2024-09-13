@@ -8,7 +8,8 @@
 FROM ubuntu:latest
 # Install required packages
 RUN apt-get update && \
-    apt-get install -y openssl squid-openssl curl iputils-ping dnsutils squidclient && \
+    apt-get install -y openssl squid-openssl curl iputils-ping dnsutils \
+                       squidclient nano net-tools tcpdump && \
     apt-get clean
 # Create directories for SSL and initialize security_file_certgen
 RUN mkdir -p /var/lib/squid && \
